@@ -4,6 +4,7 @@ import tkinter as tk
 import logging
 import tk_async_execute as tae
 
+from pythonServices.configurationService import getConf
 from pythonServices.filesService import getRessourcePath
 
 from GUI.SubscriptionsPanel import SubscriptionPanel
@@ -87,7 +88,7 @@ class mainGUI:
                     stringAddPart="To download: "+ISSScanner.bytesToString(byteSizeToBeDownload)+"."
                 byteSizeToBeRemoved=stats["toBeRemovedSkinsSpace"]
                 stringRemovePart=""
-                if byteSizeToBeRemoved!=0:
+                if byteSizeToBeRemoved!=0 and getConf("autoRemoveUnregisteredSkins"):
                     stringRemovePart="To remove: "+ISSScanner.bytesToString(byteSizeToBeRemoved)+"."
 
                 self.actionPanel.SumaryScanLabel.config(text=stringAddPart+" "+stringRemovePart)# TODO rajouter un vrai print en allant peux être faire un refactif du scanResult pour les avoir propre, possiblement en même temps que les prints dans le scan...

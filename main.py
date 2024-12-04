@@ -173,8 +173,9 @@ if __name__ == "__main__":
 
     else:
         #NORMAL GUI RUN
-        mainUI = mainGUI()
         tae.start()
+
+        mainUI = mainGUI()
         mainUI.run()
         tae.stop()
     

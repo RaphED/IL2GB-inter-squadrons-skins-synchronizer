@@ -6,6 +6,7 @@ import logging
 from pythonServices.configurationService import getConf
 from pythonServices.filesService import downloadFile
 
+
 sourcesInfo = [
     {
         "source":"HSD",
@@ -75,9 +76,13 @@ class RemoteSkin:
         firstUncensoredValue =  self.infos.get(getSourceParam(source=self.source, param="mainSkinFileName", censored=True))
         return firstUncensoredValue is not None and firstUncensoredValue != ""
 
+_cached_skins_from_source = dict[str, list[RemoteSkin]]()
 
 def getSkinsCatalogFromSource(source) -> list[RemoteSkin]:
-
+    global _cached_skins_from_source # TODO Add timer and reset if user keeps the app open for long time ?
+    if source in _cached_skins_from_source:
+        return _cached_skins_from_source[source]    
+    
     # Download the content of the file
     sourceInfo = getSourceInfo(source)
     if sourcesInfo is None: 
@@ -120,6 +125,7 @@ def getSkinsCatalogFromSource(source) -> list[RemoteSkin]:
             skins[skin_id] = remoteSkin
 
         # return only the values (we do not need skins ids)
+        _cached_skins_from_source[source]=skins.values()
         return skins.values()
 
     else:
