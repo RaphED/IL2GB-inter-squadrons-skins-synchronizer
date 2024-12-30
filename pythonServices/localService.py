@@ -11,12 +11,18 @@ from pythonServices.messageBrocker import MessageBrocker
 def getSkinDirectory():
     return os.path.join(getConf("IL2GBGameDirectory"), "data\\graphics\\skins")
 
+
+skinList = []
 def getCustomPhotosDirectory():
     return os.path.join(getConf("IL2GBGameDirectory"), "data\\graphics\\planes")
 
 def getSkinsList():
+    # TODO need cache that is reset once you synced !
+    global skinList
+    if len(skinList)>0:
+        return skinList
+    
 
-    skinList = []
     skinsDirectory = getSkinDirectory()
     
     _progress = 0.1

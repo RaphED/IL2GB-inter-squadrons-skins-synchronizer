@@ -3,6 +3,7 @@ import sys
 import logging
 from versionManager import isCurrentVersionUpToDate
 import ISSupdater
+import tk_async_execute as tae
 
 from GUI.mainGUI import runMainGUI
 from GUI.updaterGUI import runUpdaterGUI
@@ -47,7 +48,9 @@ if __name__ == "__main__":
             runUpdaterGUI(update_withPrerelease)
         #NORMAL MODE
         else:
+            tae.start()
             runMainGUI()
+            tae.stop()
     except Exception as e:
         logging.error(e)
         runCrashGUI(exception=e)

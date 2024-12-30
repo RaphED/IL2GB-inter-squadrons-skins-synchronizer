@@ -160,6 +160,6 @@ def runMainGUI():
     root = tk.Tk()
     mainGUI = MainGUI(root)
 
-    tae.start()
+    # tae.start()
     root.mainloop()
-    tae.stop()
+    # tae.stop()

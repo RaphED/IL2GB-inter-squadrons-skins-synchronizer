@@ -128,14 +128,6 @@ def bytesToString(bytesSize: int, forceSign: bool = False):
     return f"{sign}{file_size_gb:.2f} GB"
 
 
-def getSkinsMatchingWithSubscribedCollection(subscribedCollection : SubscribedCollection) -> list[remoteService.RemoteSkin]:
-    subscribedSkins = list[remoteService.RemoteSkin]()
-    applyCensorship = getConf("applyCensorship")
-    for skin in remoteService.getSkinsCatalogFromSource(subscribedCollection.source):
-        if subscribedCollection.match(skin, applyCensorship):
-            subscribedSkins.append(skin)
-    return subscribedSkins
-
 def getSkinsFromSourceMatchingWithSubscribedCollections(source, subscribedCollectionList: list[SubscribedCollection]):
     subscribedSkins = list()
     applyCensorship = getConf("applyCensorship")
